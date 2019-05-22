@@ -1,0 +1,43 @@
+Methodologies projet
+Les methodes agiles
+Scrum
+Kanban
+Cycle en V
+Waterfall
+
+Les technos
+html
+css
+js
+Nodejs
+hp
+java
+
+mongodb
+salite
+mysql
+postgresql
+
+graphql
+ViewJs
+React
+Angular
+Ruby
+Python
+
+kubernetes
+docker
+
+
+frontend
+backend
+frontoffice
+backoffice
+MVC
+SOQ
+Factory
+Repository
+Hydrator
+AJAX
+HTTP
+
