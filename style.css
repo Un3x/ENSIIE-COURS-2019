@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+}
+
+.logo-container {
+    font-size: 28px;
+}
+
+.header {
+    background-color: #ddd;
+    padding: 23px;
+}
+
+.link-header-container {
+    display: inline;
+}
+
+.link-header-item {
+    display: inline;
+}
+
+.main-container {
+    width: 70%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 90vh;
+    background-color: #ccc;
+
+}
+
+.topic-container {
+    list-style: none;
+    padding: 15px;
+}
+
+.topic-item {
+    margin: 15px;
+    padding: 10px;
+    background-color:white;
+}
+
+.footer {
+    padding: 10px;
+    background-color: #ddd;
+}
