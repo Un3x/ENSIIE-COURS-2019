@@ -1,4 +1,6 @@
 <?php
+include_once '../src/utils/autoloader.php';
+
 $data = [
     'founder' => 'Gengis Kahn'
 ];
