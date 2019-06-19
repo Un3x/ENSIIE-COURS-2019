@@ -12,9 +12,11 @@ class CommentHydrator {
       ->setId($data['id'])
       ->setTopicId($data['topic_id'])
       ->setText($data['text'])
+      ->setUserId($data['user_id'])
       ->setCreatedAt($data['created_at'])
       ->setUpdatedAt($data['updated_at'])
-      ->setScore($data['score']);
+      ->setUpvote($data['upvote'])
+      ->setDownvote($data['downvote']);
     return $comment;
   }
 }

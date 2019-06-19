@@ -11,6 +11,7 @@ class TopicHydrator {
     $topic
       ->setId($data['id'])
       ->setName($data['name'])
+      ->setUserId($data['user_id'])
       ->setCreatedAt($data['created_at'])
       ->setUpdatedAt($data['updated_at']);
     return $topic;

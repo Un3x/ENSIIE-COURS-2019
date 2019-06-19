@@ -2,6 +2,7 @@
 namespace Rediite\Model\Repository;
 
 use \Rediite\Model\Entity\Topic;
+use \Rediite\Model\Entity\User as UserEntity;
 use \Rediite\Model\Hydrator\TopicHydrator;
 
 class TopicRepository {
@@ -24,22 +25,33 @@ class TopicRepository {
     $this->topicHydrator = $topicHydrator;
   }
 
-  function insert(string $name)
+  function insert(string $name, UserEntity $user)
   {
-    $sql = "insert into topics (name) values ('$name')";
-    $this->dbAdapter->query($sql);
+    $stmt = $this->dbAdapter->prepare(
+      "insert into topics (name, user_id) values (:name, :user_id)"
+    );
+    $stmt->bindValue(':name', $name, \PDO::PARAM_STR);
+    $stmt->bindValue(':user_id', $user->getId(), \PDO::PARAM_INT);
+    $stmt->execute();
   }
 
   function delete(int $id)
   {
-    $sql = "delete from topics where id = $id";
-    $this->dbAdapter->query($sql);
+    $stmt = $this->dbAdapter->prepare(
+      "delete from topics where id = :id"
+    );
+    $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+    $stmt->execute();
+
   }
 
   function findAll() {
-    $sql = 'select * from topics';
+    $stmt = $this->dbAdapter->prepare(
+      'select * from topics'
+    );
+    $stmt->execute();
     $topics = [];
-    foreach ($this->dbAdapter->query($sql) as $rawTopic) {
+    foreach ($stmt->fetchAll() as $rawTopic) {
         $topics[] = $this->topicHydrator->hydrate($rawTopic);
     }
     return $topics;

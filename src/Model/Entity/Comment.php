@@ -20,6 +20,11 @@ class Comment {
   private $text;
 
   /**
+   * @var int
+   */
+  private $userId;
+
+  /**
    * @var \DateTime
    */
   private $createdAt;
@@ -32,7 +37,12 @@ class Comment {
   /**
    * @var integer
    */
-  private $score;
+  private $upvote;
+
+    /**
+   * @var integer
+   */
+  private $downvote;
 
   public function getId() 
   {
@@ -67,6 +77,17 @@ class Comment {
     return $this;
   }
 
+  public function getUserId()
+  {
+    return $this->userId;
+  }
+
+  public function setUserId($userId)
+  {
+    $this->userId = $userId;
+    return $this;
+  }
+
   public function getCreatedAt()
   {
     return $this->createdAt;
@@ -89,15 +110,30 @@ class Comment {
     return $this;
   }
 
-  public function getScore()
+  public function getUpvote()
   {
-    return $this->score;
+    return $this->upvote;
   }
 
-  public function setScore($score)
+  public function setUpvote($upvote)
   {
-    $this->score = $score;
+    $this->upvote = $upvote;
     return $this;
   }
 
+  public function getDownvote()
+  {
+    return $this->downvote;
+  }
+
+  public function setDownvote($downvote)
+  {
+    $this->downvote = $downvote;
+    return $this;
+  }
+
+  public function calculateScore()
+  {
+    return $this->getUpvote() - $this->getDownvote();
+  }
 }

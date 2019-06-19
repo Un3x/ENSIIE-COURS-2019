@@ -2,6 +2,7 @@
 namespace Rediite\Model\Repository;
 
 use \Rediite\Model\Entity\Comment;
+use \Rediite\Model\Entity\User as UserEntity;
 use \Rediite\Model\Hydrator\CommentHydrator;
 
 class CommentRepository {
@@ -24,22 +25,46 @@ class CommentRepository {
     $this->commentHydrator = $commentHydrator;
   }
 
-  function insert(int $topicId, string $text)
+  function insert(int $topicId, string $text, UserEntity $user)
   {
-    $sql = "insert into comments (topic_id, text) values ($topicId, '$text')";
-    $this->dbAdapter->query($sql);
+
+    $stmt = $this->dbAdapter->prepare(
+      "insert into comments (topic_id, text, user_id) values (:topicId, :text, :userId)"
+    );
+    $stmt->bindValue(':topicId', $topicId, \PDO::PARAM_INT);
+    $stmt->bindValue(':text', $text, \PDO::PARAM_STR);
+    $stmt->bindValue(':userId', $user->getId(), \PDO::PARAM_INT);
+    $stmt->execute();
   }
 
   function delete(int $id)
   {
-    $sql = "delete from comments where id = $id";
-    $this->dbAdapter->query($sql);
+    $stmt = $this->dbAdapter->prepare(
+      "delete from comments where id = :id"
+    );
+    $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+    $stmt->execute();
   }
 
   function findAllByTopicId(int $topicId) {
-    $sql = "select id, text, topic_id, created_at, updated_at, (Select COUNT(*) from votes where comment_id = 1) as score from comments where topic_id = $topicId";
+    $sql = 
+<<<SQL
+  SELECT 
+    id, 
+    text, 
+    topic_id, 
+    created_at, 
+    updated_at, 
+    (SELECT COUNT(*) FROM votes WHERE comment_id = comments.id AND voteValue = 't') AS upvote,
+    (SELECT COUNT(*) FROM votes WHERE comment_id = comments.id AND voteValue = 'f') AS downvote 
+    FROM comments 
+    WHERE topic_id = :topicId;
+SQL;
     $comments = [];
-    foreach ($this->dbAdapter->query($sql) as $rawComment) {
+    $stmt = $this->dbAdapter->prepare($sql);
+    $stmt->bindValue(':topicId', $topicId, \PDO::PARAM_INT);
+    $stmt->execute();
+    foreach ($stmt->fetchAll() as $rawComment) {
         $comments[] = $this->commentHydrator->hydrate($rawComment);
     }
     return $comments;

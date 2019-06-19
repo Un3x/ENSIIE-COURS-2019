@@ -15,6 +15,11 @@ class Topic {
   private $name;
 
   /**
+   * @var int
+   */
+  private $userId;
+
+  /**
    * @var \DateTime
    */
   private $createdAt;
@@ -43,6 +48,17 @@ class Topic {
   public function setName($name)
   {
     $this->name = $name;
+    return $this;
+  }
+
+  public function getUserId()
+  {
+    return $this->userId;
+  }
+
+  public function setUserId($userId)
+  {
+    $this->userId = $userId;
     return $this;
   }
 
