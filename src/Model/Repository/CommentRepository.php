@@ -53,6 +53,7 @@ class CommentRepository {
     id, 
     text, 
     topic_id, 
+    user_id,
     created_at, 
     updated_at, 
     (SELECT COUNT(*) FROM votes WHERE comment_id = comments.id AND voteValue = 't') AS upvote,

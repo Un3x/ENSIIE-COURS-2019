@@ -1,11 +1,8 @@
 <?php
 
 function loadView($view, $data) {
-    $dbfactory = new \Rediite\Model\Factory\dbFactory();
-    $dbAdapter = $dbfactory->createService();
-    $userHydrator = new \Rediite\Model\Hydrator\UserHydrator();
-    $userRepository = new \Rediite\Model\Repository\UserRepository($dbAdapter, $userHydrator);
-    $authenticatorService = new \Rediite\Model\Service\AuthenticatorService($userRepository);
+    $serviceManager = new \Rediite\ServiceManager();
+    $authenticatorService = $serviceManager->get(\Rediite\Model\Factory\AuthenticationServiceFactory::class);
     $user = $authenticatorService->getCurrentUser();
     ?>
     <!doctype html>
@@ -19,7 +16,7 @@ function loadView($view, $data) {
 			  crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/982b337637.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/style.css">
 
     </head>
     <body>

@@ -16,7 +16,6 @@ CREATE TABLE topics (
     updated_at TIMESTAMP default CURRENT_TIMESTAMP
 );
 
-
 INSERT INTO topics (name, user_id) VALUES ('Comment va-t-on a la fête de la bière', 1);
 INSERT INTO topics (name, user_id) VALUES ('Qui pour remplacer macron ?', 1);
 INSERT INTO topics (name, user_id) VALUES ('Le frexit et ses alternatives', 2);

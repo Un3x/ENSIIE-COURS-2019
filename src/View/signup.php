@@ -1,4 +1,4 @@
-<form action="addUser.php" method="post">
+<form action="addUser" method="post">
   <div>
     <label>Email :</label>
     <input type="text" name="email" />

@@ -4,30 +4,30 @@
     </div>
     <ul class="link-header-container">
         <li class="link-header-item">
-            <a href="index.php">Home</a>
+            <a href="index">Home</a>
         </li>
         <li class="link-header-item">
-            <a href="contact.php">Contact</a>
+            <a href="contact">Contact</a>
         </li>
         <li class="link-header-item">
-            <a href="about.php">About</a>
+            <a href="about">About</a>
         </li>
     </ul>
 
     <ul class="link-header-container">
         <?php if (!$authenticatorService->isAuthenticated()): ?>
         <li class="link-header-item">
-            <a href="login.php">Login</a>
+            <a href="login">Login</a>
         </li>
         <li class="link-header-item">
-            <a href="signup.php">Signup</a>
+            <a href="signup">Signup</a>
         </li>
         <?php else: ?>
         <li class="link-header-item">
             Welcome <?= $user->getEmail() ?>
         </li>
         <li class="link-header-item">
-            <a href="logout.php">Logout</a>
+            <a href="logout">Logout</a>
         </li>
         <?php endif; ?>
     </ul>

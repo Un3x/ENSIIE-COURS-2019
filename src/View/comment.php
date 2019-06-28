@@ -29,7 +29,7 @@
             </div>
             <?php if($authenticatorService->isAuthenticated() && $user->getId() === $comment->getUserId()): ?>
             <div class="delete-form">
-                <form action="deleteComment.php" method="post">
+                <form action="deleteComment" method="post">
                     <input type="hidden" name="topic_id" value="<?php echo $topicId ?>">
                     <input type="hidden" name="id" value="<?php echo $comment->getId() ?>">
                     <button type="submit">Supprimer</button>
@@ -40,7 +40,7 @@
     <?php endforeach; ?>
     <?php if($authenticatorService->isAuthenticated()): ?>
     <li class="topic-item">
-        <form action='addComment.php' method="post">
+        <form action='addComment' method="post">
             <input type="hidden" name="topic_id" value="<?php echo $topicId ?>">
             <input type="textarea" name="text">
             <button type="submit">Valider</button>

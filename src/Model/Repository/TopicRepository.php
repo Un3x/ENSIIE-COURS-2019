@@ -56,6 +56,19 @@ class TopicRepository {
     }
     return $topics;
   }
+
+  function findAllByUser($userId) {
+    $stmt = $this->dbAdapter->prepare(
+      'select * from topics where id = :user_id'
+    );
+    $stmt->bindValue(':user_id', $userId, \PDO::PARAM_INT);
+    $stmt->execute();
+    $topics = [];
+    foreach ($stmt->fetchAll() as $rawTopic) {
+        $topics[] = $this->topicHydrator->hydrate($rawTopic);
+    }
+    return $topics;
+  }
 }
 
 

@@ -8,12 +8,12 @@ $topics = $data["topics"];
     foreach ($topics as $topic): ?>
         <li>
             <div class="topic-item" id="topic-link-<?= $topic->getId() ?>">
-                <a  href="comments.php?topic_id=<?php echo $topic->getId() ?>">
+                <a  href="comments?topic_id=<?php echo $topic->getId() ?>">
                     <?php echo $topic->getName(); ?>
                 </a>
                 <?php if($authenticatorService->isAuthenticated() && $user->getId() === $topic->getUserId()): ?>
                     <button onClick="toggleForm(<?= $topic->getId() ?>)">Editer</button>
-                    <form action="deleteTopic.php" method="post">
+                    <form action="deleteTopic" method="post">
                         <input type="hidden" name="id" value="<?php echo $topic->getId() ?>">
                         <button type="submit">Supprimer</button>
                     </form>
@@ -21,7 +21,7 @@ $topics = $data["topics"];
             </div>
             <?php if($authenticatorService->isAuthenticated() && $user->getId() === $topic->getUserId()): ?>
             <div class="topic-item topic-edit-form" id="topic-edit-form-<?= $topic->getId() ?>">
-                <form action='updateTopic.php' method="post">
+                <form action='updateTopic' method="post">
                     <input type="text" name="name" value="<?= $topic->getName(); ?>">
                     <button type="submit">Valider</button>
                 </form>
@@ -31,7 +31,7 @@ $topics = $data["topics"];
     <?php endforeach; ?>
     <?php if($authenticatorService->isAuthenticated()): ?>
     <li class="topic-item">
-        <form action='addTopic.php' method="post">
+        <form action='addTopic' method="post">
             <input type="text" name="name">
             <button type="submit">Valider</button>
         </form>

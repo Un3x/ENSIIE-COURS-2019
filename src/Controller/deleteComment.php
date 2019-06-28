@@ -1,11 +1,8 @@
 <?php
 include_once '../src/utils/autoloader.php';
 
-
-$dbfactory = new \Rediite\Model\Factory\dbFactory();
-$dbAdapter = $dbfactory->createService();
-$commentHydrator = new \Rediite\Model\Hydrator\CommentHydrator();
-$commentRepository = new \Rediite\Model\Repository\CommentRepository($dbAdapter, $commentHydrator);
+$serviceManager = new \Rediite\ServiceManager();
+$commentRepository = $serviceManager->get(\Rediite\Model\Factory\CommentRepositoryFactory::class);
 
 
 $commentId =  $_POST['id'];

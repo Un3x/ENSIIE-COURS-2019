@@ -1,4 +1,4 @@
-<form action="authenticate.php" method="post">
+<form action="authenticate" method="post">
   <div>
     <label>Email :</label>
     <input type="text" name="email" />

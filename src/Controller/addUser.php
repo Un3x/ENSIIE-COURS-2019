@@ -2,12 +2,8 @@
 include_once '../src/utils/autoloader.php';
 include_once '../src/View/template.php';
 
-$dbfactory = new \Rediite\Model\Factory\dbFactory();
-$dbAdapter = $dbfactory->createService();
-$userHydrator = new \Rediite\Model\Hydrator\UserHydrator();
-$userRepository = new \Rediite\Model\Repository\UserRepository($dbAdapter, $userHydrator);
-
-$userService = new \Rediite\Model\Service\UserService($userRepository);
+$serviceManager = new \Rediite\ServiceManager();
+$authenticatorService = $serviceManager->get(\Rediite\Model\Factory\AuthenticationServiceFactory::class);
 
 $email =  !empty($_POST['email']) ? $_POST['email'] : null;
 $password =  !empty($_POST['password']) ? $_POST['password'] : null;
